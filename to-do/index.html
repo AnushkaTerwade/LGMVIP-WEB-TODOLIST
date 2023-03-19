@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO LIST</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <main>
+        <div class="box">
+            <h1>DAILY TASK LIST</h1>
+            <input type="text" id="data" autofocus placeholder="Add Tasks To Do....">
+            <div class="notcomp">
+                <h2>Task left to complete</h2>
+            </div>
+            <div class="comp">
+                <h2>Task completed</h2>
+              </div>
+            </div>
+    </main>
+    <script type="text/javascript">
+        $("#data").on("keyup",function(e)
+        {
+            if(e.keyCode == 13 && $("#data").val() != "")
+                {
+                  var task = $("<div class='task'></div>").text($("#data").val());
+                  var del = $("<i class='fas fa-trash-alt'></i>").click(function()
+                  {
+                    var p = $(this).parent();
+                    p.fadeOut(function()
+                    {
+                      p.remove();
+                    });
+                  });
+                  var check = $("<i class='fas fa-check'></i>").click(function()
+                  {
+                    var p = $(this).parent();
+                    p.fadeOut(function()
+                    {
+                      $(".comp").append(p);
+                      p.fadeIn();
+                    });
+                    $(this).remove();
+                  });
+                  task.append(del,check);
+                  $(".notcomp").append(task);
+                    //to clear the input
+                  $("#data").val("");
+                }
+              });
+    </script>
+</body>
+</html>
